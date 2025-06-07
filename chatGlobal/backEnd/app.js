@@ -3,6 +3,9 @@ const app = express()
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const WebScoket = require('ws')
+const wss = new WebScoket.Server({port:8080})
+require('dotenv').config()
 
 const User = require('./models/usuario')
 const conectarDB = require('./connection/dbConnection')
@@ -14,7 +17,7 @@ const conectarDB = require('./connection/dbConnection')
 // JWT
     function generateToken(user){
         return jwt.sign(
-            {userId: user.id},
+            {userId: user.id, userName: user.name},
             process.env.chaveSecreta,
             {expiresIn: process.env.tokenDuration}
         )
@@ -26,59 +29,100 @@ const conectarDB = require('./connection/dbConnection')
     }
 
     async function compareHash(userPassWord, dbPassWord){
-        if(senhaDoBanco == null || senhaDoBanco == undefined){
-            return "Comparação impossivel, hash não é valido"
+        if(dbPassWord == null || dbPassWord == undefined){
+            return "Imposible compare, this hash isn't valid"
         }
 
         const compare = await bcrypt.compare(userPassWord, dbPassWord)
 
         if(compare){
-            return true
-        }else return false
+            return 'Igual'
+        }else {
+            return 'Diferente'
+        }
     }
 //
 
 // Rotas User
+    //criar usuario
+    app.post('/userPost', async (req,res)=>{
+        const hashedPassWord = await generateHash(req.body.passWord)
 
-app.post('/userPost', async (req,res)=>{
-    const hashedPassWord = await generateHash(req.body.senha)
+        console.log(req.body)
 
-    try {
-        const user = new User({
-            name: req.body.nome,
-            password: hashedPassWord
-        })
+        try {
+            const user = new User({
+                name: req.body.name,
+                password: hashedPassWord
+            })
 
-        await user.save()
+            await user.save()
 
-        res.send({success: "user sign up with success"})
-    } catch (err) {
-        if (err.code === 11000){
-            res.status(400).send({err: "This user already exists"})
-        }else{
-            res.status(400).send({unknowErr: "Something went wrong"})
-        }
-    }
-})
-
-app.post('/userGet', (req,res)=>{
-    const userName = req.body.name
-    User.find({name: userName}).then( async (user)=>{
-        if(user){
-            const compare = await compareHash(req.body.password, user.senha)
-
-            if(compare){
-                const token = generateToken(user)
-                res.send({success:true, token: token, tokenDuration: process.env.tokenDuration})
+            res.send({success: "user sign up with success"})
+        } catch (err) {
+            if (err.code === 11000){
+                res.status(400).send({err: "This user already exists"})
+            }else{
+                res.status(400).send({unknowErr: "Something went wrong" + err})
             }
-        }else{
-            res.send({err: "Incorrect informations"})
         }
     })
-})
+    // resgatar usuario
+    app.post('/userGet', (req,res)=>{
+        const userName = req.body.name
+
+        console.log(req.body)
+
+        User.find({name: userName}).then( async (user)=>{
+            if(user){
+                const compare = await compareHash(req.body.passWord, user[0].password)
+                
+                if(compare == 'Igual'){
+                    const token = generateToken(user[0])
+                    res.send({success:true, token: token, tokenDuration: process.env.tokenDuration})
+                }else{
+                    res.send({err: 'Incorrect informations'})
+                }
+            }else{
+                res.send({err: "Incorrect informations"})
+            }
+        }).catch((err)=>{
+            res.send({err: err})
+        })
+    })
 
 
-app.listen(8081, () => {
-    conectarDB()
-    console.log('Servidor rodando na porta 8081');
-});
+    app.listen(8081, () => {
+        conectarDB()
+        console.log('Servidor rodando na porta 8081');
+    });
+//
+
+// WebScoket
+function broadCast(wss, jsonObject){
+    if(!wss.clients) return;
+    wss.clients.forEach(client => {
+        if(client.readyState === client.OPEN){
+            client.send(JSON.stringify(jsonObject))
+        }
+    })
+}
+
+function onMessage(ws, data){
+    const pacote = JSON.parse(data)
+	broadCast(wss, pacote) 
+    console.log(pacote)  
+}
+
+function onError(ws, err){
+	ws.send("Ouve um erro: "+err)
+}
+
+function Connection(ws, req){
+    console.log("Usuário se conectou")
+    ws.on("message", data => onMessage(ws, data))
+	ws.on("error", err => onError(ws, err))
+}
+
+wss.on('connection', Connection)
+wss.broadcast = broadCast

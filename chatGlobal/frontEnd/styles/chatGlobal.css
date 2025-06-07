@@ -15,7 +15,8 @@ body{
 }
 
 #chat{
-    width: 500px;
+    width: 90%;
+    max-width: 500px;
     border: 1px solid white;
     border-radius: 8px;
     padding: 12px;
@@ -68,6 +69,7 @@ body{
 }
 
 #enviarMensagem{
+    position: relative;
     margin-top: 20px;
     width: 90%;
 }
@@ -87,9 +89,34 @@ body{
     padding: 0px 2px;
     transform: translateY(-2px);
     cursor: pointer;
+    position: absolute;
+    right: 0;
 }
 
 #enviar > span{
     font-size: 28px;
     transform: translateY(1px);
+}
+
+#logOut{
+    margin: 16px 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+#logOut > span{
+    font-size: 40px;
+}
+
+@media screen and (max-width: 768px) {
+    #chat{
+        margin-top: 60px;
+        height: 500px;
+    }
+
+    #inputMsg{
+        width: 80%;
+    }
 }

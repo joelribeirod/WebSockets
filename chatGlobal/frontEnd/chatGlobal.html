@@ -4,47 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="estilos/chatGlobal.css">
+    <link rel="stylesheet" href="styles/chatGlobal.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=send" />
+    <script src="interactivity/chatGlobal.js" defer></script>
 </head>
 <body>
+    <button id="logOut">
+        <span class="material-symbols-outlined">logout</span>
+    </button>
     <div id="chat">
         <div id="mensagens">
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem user">Moso: testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem user">testanddawadawdawo uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem outroUser">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem user">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p> 
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem user">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
-            <p class="mensagem">testando uma coisa aqui</p>
+            
         </div>
         <div id="enviarMensagem">
-            <textarea rows="1" id="inputMsg" placeholder="Envie sua mensagem"></textarea>
+            <input type="text" id="inputMsg" placeholder="Envie sua mensagem">
             <button id="enviar">
                 <span class="material-symbols-outlined">send</span>
             </button>

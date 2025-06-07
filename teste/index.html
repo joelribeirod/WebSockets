@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="env">Enviar algo</button>
+
+    <script>
+        const env = document.getElementById('env')
+        const ws = new WebSocket('ws://localhost:8081');
+
+        env.addEventListener('click', ()=>{
+            ws.send('Salve servidor')
+        })
+
+        ws.onopen = () => {
+            console.log('Conectado ao servidor WebSocket');
+        };
+
+        ws.onmessage = (event) => {
+            console.log(`Resposta: ${event.data}`);
+        };
+    </script>
+</body>
+</html>
