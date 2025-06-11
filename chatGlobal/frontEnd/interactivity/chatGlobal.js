@@ -11,7 +11,7 @@ const mensagens = document.getElementById('mensagens')
 if(tokenDuration < Date.now() || tokenDuration == undefined || tokenDuration == null){
     localStorage.removeItem('tokenDuration')
     localStorage.removeItem('token')
-    window.location.replace('http://127.0.0.1:5500/chatGlobal/frontEnd/signIn.html')
+    window.location.replace('http://127.0.0.1:5500/frontEnd/signIn.html')
 }
 
 ws.onopen = () => {

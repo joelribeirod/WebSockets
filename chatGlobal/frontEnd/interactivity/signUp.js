@@ -29,7 +29,7 @@ enviar.addEventListener('click', ()=>{
         (resp)=>{
             if(resp.success){
                 window.alert('Sucesso ao cadastrar o usuario')
-                window.location.replace('http://127.0.0.1:5500/chatGlobal/frontEnd/chatGlobal.html')
+                window.location.replace('http://127.0.0.1:5500/frontEnd/chatGlobal.html')
             }else if(resp.err){
                 window.alert(resp.err)
             }

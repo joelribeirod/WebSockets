@@ -32,7 +32,7 @@ enviar.addEventListener('click', ()=>{
                 const tokenDuration = Date.now() + resp.tokenDuration * 1000;
                 localStorage.setItem('tokenDuration', tokenDuration)
                 
-                window.location.replace('http://127.0.0.1:5500/chatGlobal/frontEnd/chatGlobal.html')
+                window.location.replace('http://127.0.0.1:5500/frontEnd/chatGlobal.html')
             }else if(resp.err){
                 console.log(resp.err)
             }
