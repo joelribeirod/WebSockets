@@ -2,6 +2,8 @@ const userName = document.getElementById('userName')
 const userPassword = document.getElementById('userPassword')
 const enviar = document.getElementById('enviar')
 
+const serverUrl = 'http://localhost:8081'
+
 enviar.addEventListener('click', ()=>{
     if(userName.value == null || userName.value == undefined || userName.value.length < 4){
         window.alert('preencha os dados corretamente')
@@ -17,7 +19,7 @@ enviar.addEventListener('click', ()=>{
         passWord: userPassword.value
     }
 
-    let promise = fetch("http://localhost:8081/userPost",{
+    let promise = fetch(`${serverUrl}/userPost`,{
         method: "POST",
         headers: {
             'Content-Type': 'application/json'

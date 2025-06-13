@@ -91,13 +91,6 @@ const conectarDB = require('./connection/dbConnection')
         })
     })
 
-
-    app.listen(8081, () => {
-        conectarDB()
-        console.log('Servidor rodando na porta 8081');
-    });
-//
-
 // WebScoket
 function broadCast(wss, jsonObject){
     if(!wss.clients) return;
@@ -126,3 +119,10 @@ function Connection(ws, req){
 
 wss.on('connection', Connection)
 wss.broadcast = broadCast
+
+// Inicializar servidor
+
+app.listen(8081, () => {
+    conectarDB()
+    console.log('Servidor rodando na porta 8081');
+});

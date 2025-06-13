@@ -26,13 +26,17 @@
 
 ## Sistema de Login
 <div>
-  <img src="readme-images/sign-in.png" alt="Entrar com uma conta" width="240" style="display:inline-block; margin-right: 10px;"/>
-  <img src="readme-images/sign-up.png" alt="Criar uma conta" width="240" style="display:inline-block;"/>
+  <img src="readme-Images/signIn.png" alt="Entrar com uma conta" width="240" style="display:inline-block; margin-right: 10px;"/>
+  <img src="readme-Images/SignUp.png" alt="Criar uma conta" width="240" style="display:inline-block;"/>
 </div>
 
 
 ## Enviar mensagens
-<img src="" alt="" width="480"/>
+<div>
+  <img src="readme-Images/chatGlobal.png" alt="chat Global" width="480"/>
+  <img src="readme-Images/chatGlobalComMensagens.png" alt="chat Global com mensagens" width="480"/>
+</div>
+
 
 # ⚙ Como utilizar
 <p>O projeto possui HTML estático, portanto é possível que você precise mudar as URLs no front-end. Já o servidor é necessário rodar 2 terminais, um para iniciar o banco de dados, e o outro para iniciar o servidor</p> <br>
