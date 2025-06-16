@@ -1,5 +1,5 @@
 # 📖 O que é
-### 
+### É um projeto simples, criado para aprendizado, que utiliza com principal tecnologia o WebSockets. Websockets é uma ferramenta utilizada para a criação de uma comunicação simultânea entre cliente-servidor, posibilitando a criação de jogos, chats em tempo real e outros sistemas de comunicação dinâmica
 
 # 🛠️ Ferramentas Utilizadas
 
