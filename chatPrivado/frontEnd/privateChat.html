@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/privateChat.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="interactivity/privateChat.js" defer></script>
+</head>
+<body>
+    <button id="logOut">
+        <span class="material-symbols-outlined">logout</span>
+    </button>
+    <div id="chat">
+        <div id="conversas">
+            <span class="spanClick">+</span>
+            <span class="spanClick">1</span>
+            <span class="spanClick">2</span>
+            <span class="spanClick">3</span>
+            <span class="spanClick">4</span>
+            <span class="spanClick">5</span>
+            <span class="spanClick">6</span>
+        </div>
+        <div id="mensagens">
+            <div id="0" class="conversa infos" style="display: block;">
+                <p>Welcome to the Private Chat. Use /user to talk with someone</p>
+            </div>
+            <div id="1" class="conversa" style="display: none;">
+                <p>texto</p>
+            </div>
+            <div id="2" class="conversa" style="display: none;">
+                <p>laranja</p>
+            </div>
+            <div id="3" class="conversa" style="display: none;">
+                <p>RF</p>
+            </div>
+            <div id="4" class="conversa" style="display: none;">
+                <p>teste</p>
+            </div>
+            <div id="5" class="conversa" style="display: none;">
+                <p>nada com nada</p>
+            </div>
+            <div id="6" class="conversa" style="display: none;">
+                <p>Fulano: Salvinho?</p>
+            </div>
+        </div>
+        <div id="enviarMensagem">
+            <input type="text" id="inputMsg" placeholder="Envie sua mensagem">
+            <button id="enviar">
+                <span class="material-symbols-outlined">send</span>
+            </button>
+        </div>
+    </div>
+</body>
+</html>

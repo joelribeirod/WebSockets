@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    height: 100dvh;
+    color: white;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#signUp{
+    padding: 12px;
+    padding-top: 0px;
+    border: 1px solid white;
+}
+
+#signUp > p > a{
+    color: white;
+}
+
+#signUp p{
+    margin-top: 12px;
+}
+
+.info{
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.info > input{
+    font-size: 20px;
+}
+
+#enviar{
+    all: unset;
+    padding: 2px 4px;
+    font-size: 20px;
+    border-radius: 2px;
+    border: 1px solid white;
+    cursor: pointer;
+}
