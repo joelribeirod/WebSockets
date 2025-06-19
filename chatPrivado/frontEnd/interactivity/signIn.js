@@ -16,7 +16,7 @@ enviar.addEventListener('click', ()=>{
     
     const user = {
         name: userName.value,
-        passWord: userPassword.value
+        password: userPassword.value
     }
 
     let promise = fetch(`${serverUrl}/userGet`,{
@@ -34,7 +34,7 @@ enviar.addEventListener('click', ()=>{
                 const tokenDuration = Date.now() + resp.tokenDuration * 1000;
                 localStorage.setItem('tokenDuration', tokenDuration)
                 
-                window.location.replace('http://127.0.0.1:5500/frontEnd/chatGlobal.html')
+                window.location.replace('http://127.0.0.1:5500/chatPrivado/frontEnd/privateChat.html')
             }else if(resp.err){
                 console.log(resp.err)
             }
