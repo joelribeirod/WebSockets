@@ -21,9 +21,6 @@
 
 # 🎞 Visual do Projeto
 
-## LandPage
-<img src="" alt="" width="400"/>
-
 ## Sistema de Login
 <div>
   <img src="readme-Images/signIn.png" alt="Entrar com uma conta" width="240" style="display:inline-block; margin-right: 10px;"/>
