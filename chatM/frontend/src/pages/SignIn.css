@@ -1,0 +1,53 @@
+#signInCentral{
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+}
+
+#form{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    font-size: 20px;
+    padding: 4px 8px;
+    border: 1px solid white;
+    border-radius: 8px;
+}
+
+#form h1{
+    align-self: center;
+}
+
+#form div{
+    align-self: center;
+    width: 100%;
+}
+
+#form > div > input{
+    font-size: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#form button{
+    font-size: 16px;
+    color: white;
+    background-color: black;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    padding: 2px 4px;
+    margin-bottom: 12px;
+    
+}
+
+#form > p{
+    font-size: 16px;
+}
+
+#form > p > a{
+    color: white;
+}
