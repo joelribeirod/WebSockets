@@ -1,0 +1,79 @@
+#chatPage{
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+}
+
+#chatPage h1{
+    position: absolute;
+    top: 0;
+    margin-top: 12px;
+}
+
+#chat{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 550px;
+    border: 1px solid white;
+    border-radius: 0px 8px 8px 8px;
+}
+
+#changeConversations{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    width: 50px;
+    padding: 8px 2px;
+    position: absolute;
+
+    transform: translateX(-50px) translateY(40px);
+}
+
+#changeConversations span{
+    background-color: white;
+    color: black;
+    width: 80%;
+    align-self: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+#conversations{
+    display: flex;
+    justify-content: center;
+    height: 90%;
+}
+
+#interactivity{
+    align-self: center;
+    display: flex;
+    width: 90%;
+    gap: 10px;
+}
+
+#interactivity input{
+    font-size: 20px;
+    width: 90%;
+    border: 1px solid purple;
+    border-radius: 16px;
+    padding: 2px 4px;
+}
+
+#interactivity span{
+    background-color: white;
+    color: black;
+    padding: 4px ;
+    border-radius: 50%;
+    border: 1px solid purple;
+}
+
+.conversation{
+    width: 90%;
+}

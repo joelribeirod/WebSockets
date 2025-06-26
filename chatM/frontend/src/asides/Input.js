@@ -1,8 +1,8 @@
-function Input({text, type, placeholder}){
+function Input({text, type, placeholder, id}){
     return (
         <div>
             <p>{text}</p>
-            <input type={type} placeholder={placeholder}/>
+            <input id={id} type={type} placeholder={placeholder}/>
         </div>
     )
 }
