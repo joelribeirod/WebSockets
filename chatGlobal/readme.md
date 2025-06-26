@@ -93,4 +93,4 @@ Garanta que a URL que está dentro dos parentêses é a mesma em que ser servido
 | Rota                            | Descrição                                                                |
 |:--------------------------------|:-------------------------------------------------------------------------|
 | `/userPost`                   | Rota usada para cadastrar usuários                                                 |
-| `/userGet`                 | Rota usada para encontrar um usuário e retorn um token JWT                                          |
+| `/userGet`                 | Rota usada para encontrar um usuário e retornar um token JWT                                          |
