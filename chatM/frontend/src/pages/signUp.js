@@ -9,12 +9,12 @@ function SignUp(){
     const [userPassword, setUserPassword] = useState()
 
     function creatAcc() {
-        if(userName == undefined || userName == null){
+        if(userName === undefined || userName === null){
             window.alert('Please, insert the info before sending it')
             return;
         }
 
-        if(userPassword == undefined || userPassword == null){
+        if(userPassword === undefined || userPassword === null){
             window.alert('Please, insert the info before sending it')
             return;
         }
@@ -63,7 +63,7 @@ function SignUp(){
                 </div>
                 
                 <button onClick={creatAcc}>Enviar</button>
-                <p>Já possui uma conta? <Link to="/#/signin">Logue usando-a</Link></p>
+                <p>Já possui uma conta? <Link to="/signin">Logue usando-a</Link></p>
             </div>
         </div>
     )

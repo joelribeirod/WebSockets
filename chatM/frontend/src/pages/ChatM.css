@@ -77,3 +77,27 @@
 .conversation{
     width: 90%;
 }
+
+.setConversation{
+    padding: 2px;
+    margin-top: 12px;
+    overflow: hidden;
+    font-weight: bold;
+}
+
+.rulesAndInfos{
+    font-weight: bold;
+    color: rgb(209, 209, 209);
+}
+
+span{
+    user-select: none;
+}
+
+.on{
+    display: block;
+}
+
+.off{
+    display: none;
+}
