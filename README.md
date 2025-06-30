@@ -1,4 +1,8 @@
 # WebSockets
+## Documentação principal ainda em desenvolvimento, acesse outros projetos enquanto isso:
+[chat Global](https://github.com/joelribeirod/WebSockets/tree/main/chatGlobal)
+<br>
+[chat Privado](https://github.com/joelribeirod/WebSockets/tree/main/chatPrivado)
 
 ## rascunho Sobre como utilizar WebSockets
 
