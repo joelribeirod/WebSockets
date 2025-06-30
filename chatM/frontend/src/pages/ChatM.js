@@ -1,8 +1,23 @@
 import { useEffect, useRef, useState } from 'react'
 import './ChatM.css'
+import Span from '../asides/Span'
+import DivConversation from '../asides/DivConversation'
 
 function ChatM(){
     const ws = useRef(null)
+    const dataForTheSpansRef = useRef(null)
+
+    const [activatedDiv, setActivatedDiv] = useState({})
+    const [dataForTheSpans, setDataForTheSpans] = useState([])
+    const [dataForTheDivs, setDataForTheDivs] = useState([])
+
+    useEffect(()=>{
+        dataForTheSpansRef.current = dataForTheSpans
+    }, [dataForTheSpans])
+    
+    useEffect(()=>{
+        console.log(activatedDiv)
+    }, [activatedDiv])
 
     useEffect(()=>{
         const token = localStorage.getItem('token').split('.')
@@ -20,7 +35,24 @@ function ChatM(){
         ws.current.onmessage = (e)=>{
             const data = JSON.parse(e.data)
 
-            console.log(data)
+            // const userOrigin = data.from
+
+
+            if(data.success){
+                const userHost = data.connectedTo
+
+                let findUser = dataForTheSpansRef.current.find(user => user.userName === userHost)
+
+                // analyzes if has a conversation, else create a new one
+                if(findUser){
+                    console.log(findUser)
+                }else{
+                    setDataForTheSpans(prev => [...prev, {userName: userHost}])
+                }
+
+            }else{
+                window.alert(data.err)
+            }
         }
 
         ws.current.onclose = (e)=>{
@@ -40,8 +72,6 @@ function ChatM(){
 
     function sendMessage(){
         const divSelected = document.querySelector('.on').id
-
-        console.log(divSelected)
 
         if(message.length === 0 || message === undefined || message === null){
             return null
@@ -91,11 +121,12 @@ function ChatM(){
             <h1>Chat M</h1>
             <div id="chat">
                 <div id='changeConversations' onClick={(e)=>{
-                    if(e.target.id !== 'changeConversations'){
-                        // console.log(e.target.id)
+                    if(e.target.id === 'changeConversations'){
+                        return;
                     }
 
                     const divSelected = e.target.id
+                    setActivatedDiv({user: divSelected, class:'on'})
 
                     const divsConversation = document.querySelectorAll('.conversation')
 
@@ -109,10 +140,10 @@ function ChatM(){
                 }}>
                     <span id='globalChat' className="material-symbols-outlined">globe</span>
 
-                    {/* Spans para testes */}
-                    <span id='Fulano' className='setConversation'>Fulano</span>
-                    <span id='ciclano' className='setConversation'>ciclano</span>
-                    <span id='beltrano' className='setConversation'>beltrano</span>
+                    {/* Creates spans for change the conversations */}
+                    {dataForTheSpans.map((dado)=>(
+                        <Span key={dado.userName} userId={dado.userName} userName={dado.userName}/>
+                    ))}
                 </div>
                 <div id="conversations">
                     <div id='globalChat' className='conversation on'>
@@ -120,16 +151,8 @@ function ChatM(){
                         <p className='rulesAndInfos'>Be polite with others, and hf</p>
                     </div>
 
-                    {/* Divs para testes */}
-                    <div id='Fulano' className='conversation off'>
-                        <p className='mensagem'>Fulano: Salve</p>
-                    </div>
-                    <div id='ciclano' className='conversation off'>
-                        <p className='mensagem'>ciclaco: Salve</p>
-                    </div>
-                    <div id='beltrano' className='conversation off'>
-                        <p className='mensagem'>beltrano: Salve</p>
-                    </div>
+                    {/* Creates divs for see the conversations */}
+                    
 
                 </div>
                 <div id="interactivity">
