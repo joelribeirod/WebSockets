@@ -6,18 +6,30 @@ import DivConversation from '../asides/DivConversation'
 function ChatM(){
     const ws = useRef(null)
     const dataForTheSpansRef = useRef(null)
+    const dataForTheDivsRef = useRef(null)
+    const refForMessages = useRef(null)
 
     const [activatedDiv, setActivatedDiv] = useState({})
     const [dataForTheSpans, setDataForTheSpans] = useState([])
     const [dataForTheDivs, setDataForTheDivs] = useState([])
+
+    const [message, setMessage] = useState('')
 
     useEffect(()=>{
         dataForTheSpansRef.current = dataForTheSpans
     }, [dataForTheSpans])
     
     useEffect(()=>{
-        console.log(activatedDiv)
-    }, [activatedDiv])
+        dataForTheDivsRef.current = dataForTheDivs
+    }, [dataForTheDivs])
+
+    useEffect(()=>{
+        refForMessages.current = message
+    }, [message])
+
+    useEffect(()=>{
+        console.log(dataForTheDivs)
+    }, [dataForTheDivs])
 
     useEffect(()=>{
         const token = localStorage.getItem('token').split('.')
@@ -37,20 +49,48 @@ function ChatM(){
 
             // const userOrigin = data.from
 
+            // analyzes who sent a message
+            if(data.to){
+                console.log(data)
+            }
 
+            // analyzes if the message was sent with success
             if(data.success){
                 const userHost = data.connectedTo
 
+                // search for the user
                 let findUser = dataForTheSpansRef.current.find(user => user.userName === userHost)
+
+                console.log(data)
+
+                // remove the user name and get only the message
+                let removingName = refForMessages.current.split(" ").slice(1)
+                let joiningTheMessage = removingName.join(" ")
 
                 // analyzes if has a conversation, else create a new one
                 if(findUser){
-                    console.log(findUser)
+                    let newMessage = {sender: 'origin', message: joiningTheMessage}
+
+                    // Search for the conversation, and add the new message
+                    setDataForTheDivs(prev => prev.map((user)=>(
+                        user.userName === findUser.userName ? {...user, messages: [...user.messages, newMessage]} : user
+                    )))
+
+                    console.log(dataForTheDivsRef.current) 
                 }else{
                     setDataForTheSpans(prev => [...prev, {userName: userHost}])
+                    setDataForTheDivs(prev => [...prev, {
+                        userName: userHost, 
+                        messages: [
+                            {
+                                sender: 'origin',
+                                message: joiningTheMessage
+                            }
+                        ]
+                    }])
                 }
 
-            }else{
+            }else if(data.err){
                 window.alert(data.err)
             }
         }
@@ -67,8 +107,6 @@ function ChatM(){
             window.alert("Falha ao se conectar com o servidor")
         }
     },[])
-
-    const [message, setMessage] = useState('')
 
     function sendMessage(){
         const divSelected = document.querySelector('.on').id
@@ -151,8 +189,16 @@ function ChatM(){
                         <p className='rulesAndInfos'>Be polite with others, and hf</p>
                     </div>
 
-                    {/* Creates divs for see the conversations */}
-                    
+                    {/* Creates divs to see the conversations */}
+                    {dataForTheDivs && dataForTheDivs.map((divData)=>(
+                       
+                        <DivConversation 
+                            userName={divData.userName} 
+                            className='conversation off'
+                            messages={divData.messages}
+                        />
+                        
+                    ))}
 
                 </div>
                 <div id="interactivity">
