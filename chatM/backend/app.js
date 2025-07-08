@@ -22,6 +22,8 @@ function generateToken(user){
     )
 }
 
+// idea: Create a group feature
+
 // Routes
     // Route to return a user
     app.post('/returnUser', (req,res)=>{
