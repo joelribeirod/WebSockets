@@ -6,8 +6,8 @@
 <br>
 [Chat M](https://github.com/joelribeirod/WebSockets/tree/main/chatM)
 
-# O que WebSockets?
-#### É uma tecnologia usada para criar comunicações estáveis entre 2 pontos ou mais, usada para criar chats e jogos em tempo real. Diferente do tradicional HTTP/HTTPS que faz ciclos de requisições/respostas, o WebSockets cria um canal onde fica esperando as requisições dos usuários, e depois as trata enviando ou não as respostas
+# O que são WebSockets?
+#### É uma tecnologia usada para criar comunicações estáveis entre 2 pontos ou mais, usada para criar chats e jogos em tempo real. Diferente do tradicional HTTP/HTTPS que faz ciclos de requisições/respostas, o WebSocket cria um canal onde fica esperando as requisições dos usuários, e depois as trata enviando ou não as respostas. O cliente inicia a conexão fazendo uma requisição HTTP ao servidor, porém depois que a conexão foi estabelecida, o WebSocket assume essa conexão, fazendo uma ponto estável entre cliente-servidor.
 
 # Como se utiliza?
 ## 🛠 *1* - Servidor
@@ -20,27 +20,27 @@
 	const wss = new WebSocket.server({
 		port: 3000
 	})
- 	O paramêtro port é o unico paramêtro obrigatorio, ele indica em qual porta o servidor irá rodar
+ 	O parâmetro port é o unico parâmetro obrigatorio, ele indica em qual porta o servidor irá rodar
 
 ### *1.3* - para criar a conexão, deve se usar uma função chamada 'on', passando o evento chamado 'connection'
 	wss.on("connection", ()=>{})
 
- 	O primeiro paramêtro é o tipo do evento, no caso, 'connection' 
+ 	O primeiro parâmetro é o tipo do evento, no caso, 'connection' 
   	Ou seja, quando alguem se conectar, o segundo parâmetro irá disparar
    
  	O segundo parâmetro significa qual código irá rodar 
   	Poder ser uma função exterior, uma callback function, arrow function, etc
 
-### *1.4* - Quando recebememos uma requisição, podemos, diferenciar o tipo requisição, e assim trata-la
+### *1.4* - Quando recebemos uma requisição, podemos, diferenciar o tipo requisição, e assim trata-la
 #### *1.4.1* - Para isso, dentro do wss.on, precisamos passar dois parâmetros para a função de callback chamados ws e req
-#### *1.4.2* - O ws são as informações de quem enviou, o req é oq foi enviado
+#### *1.4.2* - O ws é a conexão ativa com o cliente, o req é a requisição HTTP que foi enviada para iniciar a conexão WebSocket
 	wss.on("connection", (ws,req)=>{})
-#### *1.4.4* - Dentro da requisição de callback, podemos utilizar alguns metódos, porém agora vou focar somente em 3
+#### *1.4.4* - Dentro da função de callback, podemos utilizar alguns métodos, porém agora vou focar somente em 3
 	message
  	close
   	error
 
-#### *1.4.6* - Para acessa-los, utilizamos o primeiro parâmetro passado para nossa função de callback, o ws e utilizamos o metódo 'on'
+#### *1.4.6* - Para acessa-los, utilizamos o primeiro parâmetro passado para nossa função de callback, o ws e utilizamos o método 'on'
 	ws.on()
 #### *1.4.8* - Depois passamos o tipo de mensagem que irremos tratar dentro do código
 	ws.on("message", ()=>{})
@@ -52,10 +52,10 @@
   		console.log(JSON.parse(data))
 	})
  
- *O WebSockets trabalha somente com o envio de strings, por isso quando uma mensagem chega, precisamos transforma-la no formato JSON*
+ *O WebSocket trabalha somente com o envio de strings, por isso quando uma mensagem chega, precisamos transforma-la no formato JSON*
  *Ou toString, depende de como você irá tratar a mensagem, se será um objeto ou uma string simples*
 
-### *1.6* - O evento 'error' é bem parecido, ele diz que, quando occorer um erro, irá disparar uma função passando o err (erro que aconteceu durante a conexão)
+### *1.6* - O evento 'error' é bem parecido, ele diz que, quando ocorer um erro, irá disparar uma função passando o err (erro que aconteceu durante a conexão)
 	ws.on("error", (err)=>{
   		console.log(err)
 	})
@@ -65,7 +65,7 @@
 	})
 
 ### *1.8* - E também temos o ws.send(), que retorna para o usuário uma mensagem
-	1ws.on("message", (data)=>{
+	ws.on("message", (data)=>{
   		console.log(JSON.parse(data))
     		ws.send("Mensagem recebida!")
 	})
@@ -83,6 +83,8 @@ Para criar uma função broadcast, devemos defini-la para enviar a mensagem para
 	6		 }
 	7	 })
 	8 }
+
+ 	"this.clients" é o conjunto de conexões WebSocket ativas no servidor.
 
 *2- Se não houver clientes conectados, não faça nada* <br>
 *3- Para cada client conectado, faça* <br>
@@ -102,7 +104,7 @@ Para criar uma função broadcast, devemos defini-la para enviar a mensagem para
 
 ## 👨‍💼 *2* - Cliente
 ### *2.0* - Primeiro devemos criar uma nova conexão WebSocket
-	const ws = new WebSocket('ws://localhost:8080') || Conexão com o servidor
+	const ws = new WebSocket('ws://localhost:8080') // Conexão com o servidor
 *Note que a url que o web sockets roda não é 'http://', e sim 'ws://'*
 
 ### *2.1* - Após criarmos a conexão, podemos usar alguns métodos para controlar o fluxo do código. São eles: 
