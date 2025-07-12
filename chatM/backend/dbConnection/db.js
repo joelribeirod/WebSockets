@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
-const db = ()=>{
+const db = (url)=>{
     try {
-        mongoose.connect(`mongodb://127.0.0.1:27017/chatM`)
+        mongoose.connect(url)
         console.log('mongoDB connect with success')
     } catch (error) {
         console.log('Error during the connection with mongoDB'+error)

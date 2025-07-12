@@ -1,27 +1,38 @@
-const express = require('express')
-const app = express()
-const jwt = require('jsonwebtoken')
-const cors = require('cors')
-const WebScoket = require('ws')
-const wss = new WebScoket.Server({port:8080})
+// Configs
+    // Load .env first of all
+    require('dotenv').config()
 
-const db = require('./dbConnection/db')
-const userSchema = require('./models/user')
+    // Dependencies
+    const express = require('express')
+    const jwt = require('jsonwebtoken')
+    const cors = require('cors')
+    const WebScoket = require('ws')
+
+    // app setup
+    const wss = new WebScoket.Server({port:8080})
+    const app = express()
+
+    // Models
+    const userSchema = require('./models/user')
+
+// Db connection
+    const db = require('./dbConnection/db')
+    const urlForDbConnection = process.env.dbConnectionURL
+    db(urlForDbConnection)
 
 // MiddleWares
-    require('dotenv').config()
     app.use(cors())
     app.use(express.json())
 
 // Token JWT
-function generateToken(user){
-    return jwt.sign(
-        {userName: user.name},
-        process.env.chaveSecreta,
-        {expiresIn: process.env.tokenDuration}
-    )
-}
-
+    function generateToken(user){
+        return jwt.sign(
+            {userName: user.name},
+            process.env.chaveSecreta,
+            {expiresIn: process.env.tokenDuration}
+        )
+    }
+    
 // idea: Create a group feature
 
 // Routes
@@ -185,6 +196,5 @@ function generateToken(user){
 
 // Start the server
 app.listen(8081, ()=>{
-    db()
     console.log('server is running')
 })
