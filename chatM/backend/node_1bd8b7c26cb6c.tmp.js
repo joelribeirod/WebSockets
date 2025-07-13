@@ -13,6 +13,7 @@
     const app = express()
     const server = http.createServer(app)
     const wss = new WebScoket.Server({server})
+    
 
     // Models
     const userSchema = require('./models/user')
