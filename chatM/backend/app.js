@@ -197,6 +197,8 @@
     })
 
 // Start the server
-server.listen(8081, ()=>{
+const PORT = process.env.PORT
+
+server.listen(PORT, ()=>{
     console.log('server is running')
 })

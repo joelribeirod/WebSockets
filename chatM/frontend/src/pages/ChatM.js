@@ -90,7 +90,7 @@ function ChatM(){
     useEffect(()=>{
         const userName = getUserName()
 
-        ws.current = new WebSocket('ws://localhost:8081')
+        ws.current = new WebSocket('wss://chat-m.onrender.com')
 
         // When opens the connection, the client sends a register message
         ws.current.onopen = () => {
