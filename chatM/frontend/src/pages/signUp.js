@@ -5,6 +5,8 @@ import './SignUp.css'
 function SignUp(){
     const navigate = useNavigate()
 
+    const urlHTTP = process.env.REACT_APP_URLCONNECTIONHTTP || 'http://localhost:8081'
+
     const [userName, setUserName] = useState()
     const [userPassword, setUserPassword] = useState()
 
@@ -26,7 +28,7 @@ function SignUp(){
 
         console.log(user)
 
-        let promise = fetch('http://localhost:8081/createUser', {
+        let promise = fetch(`${urlHTTP}/createUser`, {
             method: "POST",
             headers: {
                 'Content-Type':'application/json' 

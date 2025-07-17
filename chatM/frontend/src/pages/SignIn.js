@@ -4,17 +4,18 @@ import './SignIn.css'
 
 function SignIn(){
     const navigate = useNavigate()
+    const urlHTTP = process.env.REACT_APP_URLCONNECTIONHTTP || 'http://localhost:8081'
 
     const [userName, setUserName] = useState()
     const [userPassword, setUserPassword] = useState()
 
     function logIn(){
-        if(userName == undefined || userName == null){
+        if(userName === undefined || userName === null){
             window.alert('Please, insert the info before sending it')
             return;
         }
 
-        if(userPassword == undefined || userPassword == null){
+        if(userPassword === undefined || userPassword === null){
             window.alert('Please, insert the info before sending it')
             return;
         }
@@ -24,7 +25,7 @@ function SignIn(){
             password: userPassword
         }
 
-        let promise = fetch('http://localhost:8081/returnUser', {
+        let promise = fetch(`${urlHTTP}/returnUser`, {
             method: "POST",
             headers: {
                 'Content-Type':'application/json' 

@@ -35,7 +35,7 @@
         )
     }
     
-// idea: Create a group feature
+// idea: Create a group feature, create a guest feature (you can only see the global chat, but cant send any message), when press enter, send a message, or, if the user press enter and there's no message to be send, it focus on the input to the user type a message
 
 // Routes
     // Route to return a user

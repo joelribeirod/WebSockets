@@ -6,6 +6,9 @@ import DivConversation from '../asides/DivConversation'
 
 function ChatM(){
     const ws = useRef(null)
+    const wsConnection = process.env.REACT_APP_URLCONNECTIONWS || 'ws://localhost:8081'
+
+
     const dataForTheSpansRef = useRef(null)
     const dataForTheDivsRef = useRef(null)
     const refForMessages = useRef(null)
@@ -90,7 +93,7 @@ function ChatM(){
     useEffect(()=>{
         const userName = getUserName()
 
-        ws.current = new WebSocket('wss://chat-m.onrender.com')
+        ws.current = new WebSocket(wsConnection)
 
         // When opens the connection, the client sends a register message
         ws.current.onopen = () => {
@@ -233,7 +236,7 @@ function ChatM(){
         ws.current.onerror = ()=>{
             window.alert("Failure when connection with the server")
         }
-    },[])
+    },[wsConnection])
 
     // Function for when a user try to send a message
     function sendMessage(){
