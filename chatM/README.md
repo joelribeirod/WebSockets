@@ -1,7 +1,7 @@
 # 📖 O que é
-### Terceiro projeto de uma serie de 3, criado para aprendizado, que utiliza com principal tecnologia o WebSockets. A terceira parte é o projeto que junta os 2 conceitos dos projetos anteriores, possibilita o uso de um chat global e a função de poder conversar em chats privados. Websockets é uma ferramenta que possibilita a criação de uma comunicação simultânea entre cliente-servidor, utilizada na criação de jogos, chats em tempo real e outros sistemas de comunicação dinâmica.
+### Terceiro projeto de uma série de 3, criado para aprendizado, que utiliza com principal tecnologia o WebSockets. A terceira parte é o projeto que junta os 2 conceitos dos projetos anteriores, possibilita o uso de um chat global e a função de poder conversar em chats privados. Websockets é uma ferramenta que possibilita a criação de uma comunicação simultânea entre cliente-servidor, utilizada na criação de jogos, chats em tempo real e outros sistemas de comunicação dinâmica.
 
-# Base do projeto
+# Lógica no Front-End
 O projeto trabalha com três conjuntos de dados dinâmicos, são eles os **'spans'**, as **'divs' de conversa'**, e os **'dados para as global messages'**. <br><br>Os **'spans'** são utilizados para controlar com quem o usuário está conversando. <br>As **'divs de conversa'** são utilizadas para criar uma nova conversa de um usuário para o outro, e armazenar os dados. <br>E por fim, os **dados para as global messages**, que é utilizado para armazenar as mensagens globais. <br><br>Para poder controlar esses 3 campos, armazenamos os dados recebidos pelo servidor em três hooks de estado, 'dataForTheSpans', 'dataForTheDivs' e 'dataForGlobalMessages'. Assim, sempre que um nova conversa for criada, guardamos essa criação no 'dataForTheSpans' e no 'dataForTheDivs'. Quando alguem enviar uma mensagem global ela é armazenada no 'dataForGlobalMessages'. E quando uma mensagem privada for enviada/recebida, ela fica armazenada dentro de um array no hook de estado 'dataForTheDivs'
 
     {
@@ -13,7 +13,6 @@ O projeto trabalha com três conjuntos de dados dinâmicos, são eles os **'span
     }
 
 **'userName'** é utilizado para controlar com quem estamos conversando. <br>**'messages'** guarda um array de objetos, cada objeto é uma mensagem com os campos **'sender'** e **'message'**. Sender poderá ter um de dois valores, **'host'** ou **'origin'**, origin para quando o nosso usuário atual for quem enviou a mensagem, e host para quando a mensagem tiver vindo de um outro usuário
-
 
 # 🛠️ Ferramentas Utilizadas
 
@@ -28,7 +27,7 @@ O projeto trabalha com três conjuntos de dados dinâmicos, são eles os **'span
 
 # 🎯 Funcionalidades
 ☑ API RESTful <br>
-☑ Comunicação entre usuários através de WebScokets <br> 
+☑ Comunicação entre usuários através de WebSockets <br> 
 ☑ Cadastro de usuários <br>
 ☑ Validação de login <br>
 ☑ JWT para Autentificação <br>
@@ -84,7 +83,7 @@ Este comando iniciará o servidor MongoDB e ele começará a ouvir conexões no 
     REACT_APP_URLCONNECTIONWS='ws://localhost:8081'
     REACT_APP_URLCONNECTIONHTTP='http://localhost:8081'
 <p>Isso fará com que toda a aplicação Front-end se conecte com o servidor</p>
-<p>Essa parte é opcional pois o código ja possui uma verificação sobre se existem variáveis .env, se n existe ele usa os valores padrões, que são os mesmos do código de exmplo acima</p>
+<p>Essa parte é opcional pois o código já possui uma verificação sobre se existem variáveis .env, e se não existirem ele usa os valores padrões, que são os mesmos do código de exemplo acima</p>
 
 ## 📦 Back-end
 
