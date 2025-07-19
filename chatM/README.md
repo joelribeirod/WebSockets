@@ -1,6 +1,19 @@
-*Ainda não está finalizado, faltão alguns detalhes*
 # 📖 O que é
-### Terceiro projeto de uma serie de 3, criado para aprendizado, que utiliza com principal tecnologia o WebSockets. A primeira parte cria um unico chat global. A segunda parte possibilita a criação de vários chats privados com outros usuários. A terceira parte é o projeto que junta esses 2 conceitos, possibilita o uso de um chat global e a função de poder conversar em chats privados. Por fim websockets é uma ferramenta utilizada para a criação de uma comunicação simultânea entre cliente-servidor, posibilitando a criação de jogos, chats em tempo real e outros sistemas de comunicação dinâmica.
+### Terceiro projeto de uma serie de 3, criado para aprendizado, que utiliza com principal tecnologia o WebSockets. A terceira parte é o projeto que junta os 2 conceitos dos projetos anteriores, possibilita o uso de um chat global e a função de poder conversar em chats privados. Websockets é uma ferramenta que possibilita a criação de uma comunicação simultânea entre cliente-servidor, utilizada na criação de jogos, chats em tempo real e outros sistemas de comunicação dinâmica.
+
+# Base do projeto
+O projeto trabalha com três conjuntos de dados dinâmicos, são eles os **'spans'**, as **'divs' de conversa'**, e os **'dados para as global messages'**. <br><br>Os **'spans'** são utilizados para controlar com quem o usuário está conversando. <br>As **'divs de conversa'** são utilizadas para criar uma nova conversa de um usuário para o outro, e armazenar os dados. <br>E por fim, os **dados para as global messages**, que é utilizado para armazenar as mensagens globais. <br><br>Para poder controlar esses 3 campos, armazenamos os dados recebidos pelo servidor em três hooks de estado, 'dataForTheSpans', 'dataForTheDivs' e 'dataForGlobalMessages'. Assim, sempre que um nova conversa for criada, guardamos essa criação no 'dataForTheSpans' e no 'dataForTheDivs'. Quando alguem enviar uma mensagem global ela é armazenada no 'dataForGlobalMessages'. E quando uma mensagem privada for enviada/recebida, ela fica armazenada dentro de um array no hook de estado 'dataForTheDivs'
+
+    {
+      userName: userHost, 
+      messages: [{
+        sender: 'host',
+        message: data.msg
+      }]
+    }
+
+**'userName'** é utilizado para controlar com quem estamos conversando. <br>**'messages'** guarda um array de objetos, cada objeto é uma mensagem com os campos **'sender'** e **'message'**. Sender poderá ter um de dois valores, **'host'** ou **'origin'**, origin para quando o nosso usuário atual for quem enviou a mensagem, e host para quando a mensagem tiver vindo de um outro usuário
+
 
 # 🛠️ Ferramentas Utilizadas
 
@@ -22,22 +35,30 @@
 
 # 🎞 Visual do Projeto
 
-## Sistema de Login
+## 🔐 Sistema de Login
 <div>
-  <img src="" alt="Entrar com uma conta" width="240" style="display:inline-block; margin-right: 10px;"/>
-  <img src="" alt="Criar uma conta" width="240" style="display:inline-block;"/>
+  <img src="readme-images/signIn.png" alt="Entrar com uma conta" width="240" style="display:inline-block; margin-right: 10px;"/>
+  <img src="readme-images/signUp.png" alt="Criar uma conta" width="240" style="display:inline-block;"/>
 </div>
 
+## 💻 Aparência
 
-## Enviar mensagens
 <div>
-  <img src="" alt="" width="480"/>
-  <img src="" alt="" width="480"/>
+  <img src="readme-images/visual.png" alt="Visual do Projeto" width="480"/>
+</div>
+
+## 📲 Enviar mensagens
+<div>
+  <img src="readme-images/sendingAMessage.png" alt="Enviando uma mensagem" width="480"/>
+  <hr>
+  <img src="readme-images/privateMessage.png" alt="Enviando uma mensagem privada" width="480"/>
+  <hr>
+  <img src="readme-images/bigMessage.png" alt="Enviando uma mensagem grande" width="480"/>
 </div>
 
 
 # ⚙ Como utilizar
-<p>O Projeto é dividido em 2 pastas principais, uma para o Front-end com React.js e outra para o Back-end com Node.js, serão necessário rodar 3 terminais, pois você também precisa inicializar ser banco de dados</p> <br>
+<p>O Projeto é dividido em 2 pastas principais, uma para o Front-end com React.js e outra para o Back-end com Node.js, serão necessário rodar 3 terminais, pois você também precisa inicializar seu banco de dados</p> <br>
 
 ## 🎲 Banco de Dados
 ### Garanta que antes de iniciar o servidor, você esteja com seu banco de Dados Mongo iniciado
@@ -57,7 +78,7 @@ Este comando iniciará o servidor MongoDB e ele começará a ouvir conexões no 
     npm install
 ### Inicialize o projeto
     npm start
-### Crie um arquivo dotenv para amazenar a URL (Opcional)
+### Crie um arquivo dotenv para armazenar a URL (Opcional)
     Crie um arquivo '.env'
     Configure a URL gerada pelo servidor. Exemplo: 
     REACT_APP_URLCONNECTIONWS='ws://localhost:8081'
@@ -76,9 +97,9 @@ Este comando iniciará o servidor MongoDB e ele começará a ouvir conexões no 
 
 #### O servidor vai rodar em http://localhost:8081 (Você pode mudar a porta no código do servidor). O WebSocket está integrado no servidor, portanto a porta será a mesma porta, a diferença é que, para acessar o ws, você ao invés de usar 'http://', usará 'ws://'
 
-### Crie um arquivo dotenv para amazenar as configurações do JWT
+### Crie um arquivo dotenv para armazenar as configurações do JWT
     Crie um arquivo '.env' na pasta backEnd
-    Configure as variaveis 'chaveSecreta', 'tokenDuration' e 'dbConnectionURL'
+    Configure as variáveis 'chaveSecreta', 'tokenDuration' e 'dbConnectionURL'
     Exemplo: 
     chaveSecreta='minha_Aplicação'
     tokenDuration=7200
