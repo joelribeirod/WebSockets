@@ -41,17 +41,19 @@ O projeto trabalha com três conjuntos de dados dinâmicos, são eles os **'span
 </div>
 
 ## 💻 Aparência
-
 <div>
   <img src="readme-images/visual.png" alt="Visual do Projeto" width="480"/>
 </div>
 
 ## 📲 Enviar mensagens
 <div>
+  <strong>Enviando uma mensagem</strong> <br><br>
   <img src="readme-images/sendingAMessage.png" alt="Enviando uma mensagem" width="480"/>
   <hr>
+  <strong>Enviando uma mensagem privada</strong><br><br>
   <img src="readme-images/privateMessage.png" alt="Enviando uma mensagem privada" width="480"/>
   <hr>
+  <strong>Enviando uma mensagem grande</strong><br><br>
   <img src="readme-images/bigMessage.png" alt="Enviando uma mensagem grande" width="480"/>
 </div>
 
