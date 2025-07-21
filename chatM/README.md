@@ -1,7 +1,7 @@
 # 📖 O que é
 ### Terceiro projeto de uma série de 3, criado para aprendizado, que utiliza com principal tecnologia o WebSockets. A terceira parte é o projeto que junta os 2 conceitos dos projetos anteriores, possibilita o uso de um chat global e a função de poder conversar em chats privados. Websockets é uma ferramenta que possibilita a criação de uma comunicação simultânea entre cliente-servidor, utilizada na criação de jogos, chats em tempo real e outros sistemas de comunicação dinâmica.
 
-# Lógica no Front-End
+# 🧠 Lógica no Front-End
 O projeto trabalha com três conjuntos de dados dinâmicos, são eles os **'spans'**, as **'divs' de conversa'**, e os **'dados para as global messages'**. <br><br>Os **'spans'** são utilizados para controlar com quem o usuário está conversando. <br>As **'divs de conversa'** são utilizadas para criar uma nova conversa de um usuário para o outro, e armazenar os dados. <br>E por fim, os **dados para as global messages**, que é utilizado para armazenar as mensagens globais. <br><br>Para poder controlar esses 3 campos, armazenamos os dados recebidos pelo servidor em três hooks de estado, 'dataForTheSpans', 'dataForTheDivs' e 'dataForGlobalMessages'. Assim, sempre que um nova conversa for criada, guardamos essa criação no 'dataForTheSpans' e no 'dataForTheDivs'. Quando alguem enviar uma mensagem global ela é armazenada no 'dataForGlobalMessages'. E quando uma mensagem privada for enviada/recebida, ela fica armazenada dentro de um array no hook de estado 'dataForTheDivs'
 
     {
