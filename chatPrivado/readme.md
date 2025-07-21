@@ -1,8 +1,8 @@
 # 📖 O que é
 ### Segundo projeto de uma serie de 3, criado para aprendizado, que utiliza com principal tecnologia o WebSockets. A segunda parte disponibiliza a função de criação de vários chats privados com outros usuários. Websockets é uma ferramenta que possibilita a criação de uma comunicação simultânea entre cliente-servidor, utilizada na criação de jogos, chats em tempo real e outros sistemas de comunicação dinâmica.
 
-# Lógica no Front-End
-Por ser um projeto onde eu apenas testo a funcionalidade de chats privados, você tem que saber o nome de usuário do outro usuário que quer conversar para poder então enviar uma mensagem, para isso, se utiliza o comando '/<user>'. Exemplo:
+# 🧠 Lógica no Front-End
+Este projeto tem a única funcionalidade de chats privados, para envia uma mensagem, você tem que saber o nome do outro usuário que quiser conversar para poder então enviar uma mensagem, para isso, se utiliza o comando '/<NomeDeUsuario>'. Exemplo:
 
     /Joel Olá, tudo bem?
     -> Olá, tudo bem?
