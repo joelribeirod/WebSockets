@@ -1,5 +1,8 @@
 # 📖 O que é
-### Primeiro projeto de uma serie de 3, criado para aprendizado, que utiliza com principal tecnologia o WebSockets. A primeira parte cria um unico chat global. A segunda parte possibilita a criação de vários chats privados com outros usuários. A terceira parte é o projeto que junta esses 2 conceitos, possibilita o uso de um chat global e a função de poder conversar em chats privados. Por fim websockets é uma ferramenta utilizada para a criação de uma comunicação simultânea entre cliente-servidor, posibilitando a criação de jogos, chats em tempo real e outros sistemas de comunicação dinâmica.
+### Primeiro projeto de uma serie de 3, criado para aprendizado, que utiliza com principal tecnologia o WebSockets. Nessa primeira parte disponibilizamos um chat global, para todos poderem interagir. Websockets é uma ferramenta que possibilita a criação de uma comunicação simultânea entre cliente-servidor, utilizada na criação de jogos, chats em tempo real e outros sistemas de comunicação dinâmica.
+
+# 🧠 Lógica do Front-End
+Este projeto é centrado no recurso de chat global, onde todos se comunicam entre si, sem a possibilidade de uma comunicação privada entre usuários (isso existe nos próximos projetos). <br><br>Quando um usuário envia uma mensagem, o servidor recebe essa mensagem, e através de uma função de broad cast integrada no servidor, o servidor monta um pacote com quem enviou a mensagem e qual mensagem foi enviada, e então ele a manda para todos os usuário que estão ativos no servidor.
 
 # 🛠️ Ferramentas Utilizadas
 
