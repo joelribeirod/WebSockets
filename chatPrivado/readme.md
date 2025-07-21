@@ -1,5 +1,14 @@
 # 📖 O que é
-### Segundo projeto de uma serie de 3, criado para aprendizado, que utiliza com principal tecnologia o WebSockets. A primeira parte cria um unico chat global. A segunda parte possibilita a criação de vários chats privados com outros usuários. A terceira parte é o projeto que junta esses 2 conceitos, possibilita o uso de um chat global e a função de poder conversar em chats privados. Por fim websockets é uma ferramenta utilizada para a criação de uma comunicação simultânea entre cliente-servidor, posibilitando a criação de jogos, chats em tempo real e outros sistemas de comunicação dinâmica.
+### Segundo projeto de uma serie de 3, criado para aprendizado, que utiliza com principal tecnologia o WebSockets. A segunda parte disponibiliza a função de criação de vários chats privados com outros usuários. Websockets é uma ferramenta que possibilita a criação de uma comunicação simultânea entre cliente-servidor, utilizada na criação de jogos, chats em tempo real e outros sistemas de comunicação dinâmica.
+
+# Lógica no Front-End
+Por ser um projeto onde eu apenas testo a funcionalidade de chats privados, você tem que saber o nome de usuário do outro usuário que quer conversar para poder então enviar uma mensagem, para isso, se utiliza o comando '/<user>'. Exemplo:
+
+    /Joel Olá, tudo bem?
+    -> Olá, tudo bem?
+
+Quando uma mensagem é enviada, o servidor retorna se houve sucesso ao enviar a mensagem, se tiver sucesso, o front-end análise se existe a seção com aquela conversa, se não ele já cria uma nova seção para aquela conversa e adiciona a mensagem que foi enviada. <br><br>Caso uma mensagem seja recebida, o servidor envia um pacote para você avisando que o usuário X enviou uma mensagem. Então, o front-end faz a mesma verificação anterior de ver se a seção existe ou não.<br><br>
+O Projeto é feito em html estático, por esse motivo, não é necessário controlar o total dos dados, apenas resgatamos o dado que o servidor enviou, e então o exibimos para o usuário atráves de um elemento html.
 
 # 🛠️ Ferramentas Utilizadas
 
