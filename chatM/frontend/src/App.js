@@ -8,7 +8,7 @@ import ChatM from './pages/ChatM';
 function App() {
   return (
     <Routes>
-      <Route path='/signin' element={<SignIn />}/> 
+      <Route path='/' element={<SignIn />}/> 
       <Route path='/signup' element={<SignUp/>}/>
       <Route path='/chatm' element={<ChatM/>}/>
     </Routes>

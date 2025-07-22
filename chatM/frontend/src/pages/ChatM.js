@@ -30,7 +30,7 @@ function ChatM(){
         ws.current.close(1000, 'encerrando a conexão')
         localStorage.removeItem('token')
         localStorage.removeItem('tokenDuration')
-        navigate('/signIn')
+        navigate('/')
     }
     
     // Function to get the user name from the JWT token
@@ -48,13 +48,13 @@ function ChatM(){
         const token = localStorage.getItem('token')
         const tokenDuration = localStorage.getItem('tokenDuration')
         if(!token){
-            navigate('/signIn')
+            navigate('/')
         }
 
         if(Number(tokenDuration) + Date.now() < Date.now()){
             localStorage.removeItem('token')
             localStorage.removeItem('tokenDuration')
-            navigate('/signIn')            
+            navigate('/')            
         } 
     })
 

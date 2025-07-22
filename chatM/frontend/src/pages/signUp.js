@@ -39,7 +39,7 @@ function SignUp(){
         Promise.resolve(promise).then((resp)=>{
             if(resp.success){
                 window.alert('sucesso ao cadastrar usuario')
-                navigate('/signin')
+                navigate('/')
             }else{
                 console.log(resp)
             }
@@ -65,7 +65,7 @@ function SignUp(){
                 </div>
                 
                 <button onClick={creatAcc}>Enviar</button>
-                <p>Já possui uma conta? <Link to="/signin">Logue usando-a</Link></p>
+                <p>Já possui uma conta? <Link to="/">Logue usando-a</Link></p>
             </div>
         </div>
     )
