@@ -36,7 +36,7 @@
 ### *2.8* - O método 'ws.onmessage' representa a função callback que será executada quando o servidor enviar uma mensagem ao cliente
 ### *2.9* - O método 'ws.send' é a função que utilizaremos para enviar uma resposta/mensagem ao servidor, normalmente utilizado ao longo do código sempre que será necessário enviar algo ao servidor
 
-# ⌨ Como se utiliza?
+# ⌨ Como utilizar na prática
 ## 🛠 *1* - Servidor
 ### *1.0* - Primeiro se instala o ws.
 	npm install ws 
