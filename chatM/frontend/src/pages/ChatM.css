@@ -64,6 +64,7 @@
     border: 1px solid purple;
     border-radius: 16px;
     padding: 2px 4px;
+    user-select: none;
 }
 
 #interactivity span{
@@ -181,4 +182,17 @@ span{
     position: absolute;
     bottom: 0;
     right: 0;
+}
+
+#charactersCounter{
+    align-self: flex-end;
+    margin-right: 4px;
+}
+
+.greaterThan{
+    color: red;
+}
+
+.lessThan{
+    color: blue;
 }

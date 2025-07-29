@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate} from "react-router-dom"
 import './ChatM.css'
 import Span from '../asides/Span'
@@ -12,11 +12,12 @@ function ChatM(){
     const dataForTheSpansRef = useRef(null)
     const dataForTheDivsRef = useRef(null)
     const refForMessages = useRef(null)
-
     const refForActivatedDiv = useRef(null)
+    const refForInputThatSendMessage = useRef(null)
     
     const [activatedDiv, setActivatedDiv] = useState([])
     const [userCounteur, setUserCounteur] = useState(0)
+    const [charactersCounter, setCharactersCounter] = useState(0)
     const [dataForTheSpans, setDataForTheSpans] = useState([])
     const [dataForTheDivs, setDataForTheDivs] = useState([])
     const [dataForGlobalMessages, setDataForGlobalMessages] = useState([])
@@ -159,6 +160,7 @@ function ChatM(){
                 
 
                 // analyzes if has a conversation, else create a new one
+                console.log(refForMessages)
                 if(findUser){
                     let newMessage = {
                         sender: 'origin', 
@@ -182,8 +184,7 @@ function ChatM(){
                         ]
                     }])
                 }
-
-                // clear the input message after sending the message
+                // clear the input message after sending a message
                 setMessage('')
             }
 
@@ -209,7 +210,6 @@ function ChatM(){
                 
                 // Update the data and clear the input message
                 setDataForGlobalMessages(prev => [...prev, newMessage])
-                setMessage('')
             }
 
             // If the server message is a counter, it update the userCounter with the recent number
@@ -228,24 +228,34 @@ function ChatM(){
             if(e.wasClean){
                 console.log("Server closed: "+e.code)
             }else{
-                window.alert("Something went wrong with our server, please try reload the page or come later")
+                console.log("Something went wrong with our server, we are trying to reconnect with it")
+
+                ws.current.send(JSON.stringify({
+                    type:'register',
+                    username: userName
+                }))
             }
         }
 
         // If the connection goes wrong
         ws.current.onerror = ()=>{
-            window.alert("Failure when connection with the server")
+            window.alert("Failure when connection with the server, try reload your page")
         }
     },[wsConnection])
 
     // Function for when a user try to send a message
-    function sendMessage(){
+    const sendMessage = useCallback(()=>{
         // Get the div that the user are typing
         const divSelected = document.querySelector('.on').id
 
         // Analyses if isn't a null message
         if(message.length === 0 || message === undefined || message === null){
             return null
+        }
+
+        if(message.length > 1024){
+            window.alert('Input limit exceeded, limit 1024 characters')
+            return;
         }
 
         // Separete the name of the message
@@ -291,7 +301,28 @@ function ChatM(){
 
             ws.current.send(JSON.stringify(userPackage))
         }
-    }
+        //Clear the Character Counter after sending a message
+        setCharactersCounter(0)
+    },[message])
+
+    useEffect(()=>{
+        function analysesIfHasFocus(e){
+            if(e.key === 'Enter'){
+                if(document.activeElement === refForInputThatSendMessage.current){
+                    sendMessage()
+                }else{
+                    refForInputThatSendMessage.current.focus()
+                }
+            }
+        }
+
+        window.addEventListener('keydown', analysesIfHasFocus)
+
+        return ()=>{
+            window.removeEventListener('keydown', analysesIfHasFocus)
+        }
+        
+    },[sendMessage])
 
     return (
         <div id="chatPage">
@@ -299,7 +330,7 @@ function ChatM(){
 
             <div id='userInfo'>
                 <button id="logOut" onClick={()=>(closeWS())}>
-                    <span class="material-symbols-outlined">logout</span>
+                    <span className="material-symbols-outlined">logout</span>
                 </button>
                 <h1>User: {getUserName()}</h1>
             </div>
@@ -359,14 +390,21 @@ function ChatM(){
 
                 {/* Where stays the input and the button to send the message */}
                 <div id="interactivity">
-                    <input type='text' 
+                    <input 
+                    type='text' 
+                    ref={refForInputThatSendMessage}
                     placeholder='Send your message' 
                     value={message}
                     onChange={(e)=>{
                         setMessage(e.target.value)
+                        setCharactersCounter(e.target.value.length)
                     }}/>
                     <span className="material-symbols-outlined" onClick={sendMessage}>send</span>
                 </div>
+                {/* <span id='charactersCounter'>{charactersCounter}/1024</span> */}
+                {charactersCounter > 1024 ? 
+                <span id='charactersCounter' className='greaterThan'>{charactersCounter}/1024</span> : 
+                <span id='charactersCounter' className='lessThan'>{charactersCounter}/1024</span>}
             </div>
 
             <p id='UserCounteur'>Online Users: {userCounteur}</p>

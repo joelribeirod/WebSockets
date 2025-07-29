@@ -21,6 +21,11 @@ function SignUp(){
             return;
         }
 
+        if(userName.length > 25){
+            window.alert('Please, insert a name with less than 25 characters')
+            return;
+        }
+
         const user = {
             name: userName,
             password: userPassword
@@ -55,7 +60,7 @@ function SignUp(){
 
                 <div id="infos">
                     <p>Seu nome:</p>
-                    <input type='text' onChange={(e)=>{
+                    <input type='text' maxLength='25' onChange={(e)=>{
                         setUserName(e.target.value)
                     }}/>
                     <p>Sua senha:</p>
