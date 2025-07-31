@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useNavigate, Link } from "react-router-dom"
+
 import './SignIn.css'
+import LanguageOptions from '../asides/LanguageOptions'
 
 function SignIn(){
     const navigate = useNavigate()
@@ -71,6 +73,7 @@ function SignIn(){
                 <button onClick={logIn}>Enviar</button>
                 <p>Não possui uma conta? <Link to="/signup">Crie uma aqui</Link></p>
             </div>
+            <LanguageOptions />
         </div>
     )
 }

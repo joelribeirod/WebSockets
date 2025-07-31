@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from "react-router-dom"
 import './SignUp.css'
+import LanguageOptions from '../asides/LanguageOptions'
 
 function SignUp(){
     const navigate = useNavigate()
@@ -72,6 +73,7 @@ function SignUp(){
                 <button onClick={creatAcc}>Enviar</button>
                 <p>Já possui uma conta? <Link to="/">Logue usando-a</Link></p>
             </div>
+            <LanguageOptions/>
         </div>
     )
 }

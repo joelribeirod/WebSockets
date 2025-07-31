@@ -3,6 +3,7 @@ import { useNavigate} from "react-router-dom"
 import './ChatM.css'
 import Span from '../asides/Span'
 import DivConversation from '../asides/DivConversation'
+import LanguageOptions from '../asides/LanguageOptions'
 
 function ChatM(){
     const ws = useRef(null)
@@ -234,6 +235,7 @@ function ChatM(){
                     type:'register',
                     username: userName
                 }))
+                // Provavelmente isso ainda não está funcionando, pois essa callback executada quando a conexão fecha, e do jeito que está, ela informa no console que fechou e tentar mandar uma mensagem, mas n sei se tem como mandar uma mensagem se a conexão fechou
             }
         }
 
@@ -401,13 +403,14 @@ function ChatM(){
                     }}/>
                     <span className="material-symbols-outlined" onClick={sendMessage}>send</span>
                 </div>
-                {/* <span id='charactersCounter'>{charactersCounter}/1024</span> */}
+
                 {charactersCounter > 1024 ? 
                 <span id='charactersCounter' className='greaterThan'>{charactersCounter}/1024</span> : 
                 <span id='charactersCounter' className='lessThan'>{charactersCounter}/1024</span>}
             </div>
 
             <p id='UserCounteur'>Online Users: {userCounteur}</p>
+            <LanguageOptions/>
         </div>
     )
 }

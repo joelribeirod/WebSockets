@@ -41,7 +41,7 @@
     border-radius: 4px;
     padding: 2px 4px;
     margin-bottom: 12px;
-    
+    cursor: pointer;
 }
 
 #form > p{
