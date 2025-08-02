@@ -8,7 +8,7 @@ import LanguageOptions from '../asides/LanguageOptions'
 function ChatM(){
     const ws = useRef(null)
     const wsConnection = process.env.REACT_APP_URLCONNECTIONWS || 'ws://localhost:8081'
-    const language = JSON.parse(localStorage.getItem('language')).language
+    const language = JSON.parse(localStorage.getItem('language') || '{}')?.language || 'br'
 
     const dataForTheSpansRef = useRef(null)
     const dataForTheDivsRef = useRef(null)
@@ -17,6 +17,7 @@ function ChatM(){
     const refForInputThatSendMessage = useRef(null)
     
     const [lang, setLang] = useState(language)
+    const [urlWS, setUrlWS] = useState(wsConnection)
     const [activatedDiv, setActivatedDiv] = useState([])
     const [userCounteur, setUserCounteur] = useState(0)
     const [charactersCounter, setCharactersCounter] = useState(0)
@@ -216,6 +217,7 @@ function ChatM(){
 
             // If the server message is a counter, it update the userCounter with the recent number
             if(data.counteur){
+                console.log(data)
                 setUserCounteur(data.msg)
             }
             
@@ -230,21 +232,27 @@ function ChatM(){
             if(e.wasClean){
                 console.log("Server closed: "+e.code)
             }else{
-                console.log("Something went wrong with our server, we are trying to reconnect with it")
-
-                ws.current.send(JSON.stringify({
-                    type:'register',
-                    username: userName
-                }))
+                console.log(e)
+                window.alert("Something went wrong with our server, we are trying to reconnect with it")
+                setUrlWS(process.env.REACT_APP_URLCONNECTIONWS || 'ws://localhost:8081')
+                // ws.current.send(JSON.stringify({
+                //     type:'register',
+                //     username: userName
+                // }))
                 // Provavelmente isso ainda não está funcionando, pois essa callback executada quando a conexão fecha, e do jeito que está, ela informa no console que fechou e tentar mandar uma mensagem, mas n sei se tem como mandar uma mensagem se a conexão fechou
             }
         }
 
         // If the connection goes wrong
-        ws.current.onerror = ()=>{
+        ws.current.onerror = (e)=>{
+            console.log(e)
             window.alert("Failure when connection with the server, try reload your page")
         }
-    },[wsConnection])
+    },[urlWS])
+
+    useEffect(()=>{
+        console.log(urlWS)
+    },[urlWS])
 
     // Function for when a user try to send a message
     const sendMessage = useCallback(()=>{
@@ -306,6 +314,8 @@ function ChatM(){
         }
         //Clear the Character Counter after sending a message
         setCharactersCounter(0)
+        //Clear the input after sending a message
+        setMessage('')
     },[message])
 
     useEffect(()=>{

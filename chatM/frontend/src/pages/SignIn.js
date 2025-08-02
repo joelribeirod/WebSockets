@@ -5,7 +5,7 @@ import './SignIn.css'
 import LanguageOptions from '../asides/LanguageOptions'
 
 function SignIn(){
-    const language = JSON.parse(localStorage.getItem('language')).language
+    const language = JSON.parse(localStorage.getItem('language') || '{}')?.language || 'br'
     const navigate = useNavigate()
     const urlHTTP = process.env.REACT_APP_URLCONNECTIONHTTP || 'http://localhost:8081'
 

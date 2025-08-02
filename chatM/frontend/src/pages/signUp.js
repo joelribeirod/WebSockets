@@ -7,7 +7,7 @@ function SignUp(){
     const navigate = useNavigate()
 
     const urlHTTP = process.env.REACT_APP_URLCONNECTIONHTTP || 'http://localhost:8081'
-    const language = JSON.parse(localStorage.getItem('language')).language
+    const language = JSON.parse(localStorage.getItem('language') || '{}')?.language || 'br'
 
     const [lang, setLang] = useState(language)
     const [userName, setUserName] = useState()

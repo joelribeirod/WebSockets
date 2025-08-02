@@ -20,10 +20,6 @@ function LanguageOptions({getLang}){
         setWhatLanguage(countrySelected)
         getLang(countrySelected)
     },[countrySelected])
-
-    useEffect(()=>{
-        
-    },[])
     
 
     const language = localStorage.getItem('language')
