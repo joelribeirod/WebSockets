@@ -7,9 +7,42 @@ function SignUp(){
     const navigate = useNavigate()
 
     const urlHTTP = process.env.REACT_APP_URLCONNECTIONHTTP || 'http://localhost:8081'
+    const language = JSON.parse(localStorage.getItem('language')).language
 
+    const [lang, setLang] = useState(language)
     const [userName, setUserName] = useState()
     const [userPassword, setUserPassword] = useState()
+
+    const textsLang = {
+        creat:{
+            br: 'Criar conta',
+            us: 'Create account'
+        },
+        name:{
+            br: 'Seu nome',
+            us: 'Your name'
+        },
+        password:{
+            br: 'Sua senha',
+            us: 'Your password'
+        },
+        btn:{
+            br: 'Enviar',
+            us: 'Send'
+        },
+        redirect:{
+            br: 'Já possui uma conta?',
+            us: 'Already have an account?'
+        },
+        redirectLink:{
+            br: 'Logue usando-a',
+            us: 'Log it here'
+        }
+    }
+
+    function getLang(e){
+        setLang(e)
+    }
 
     function creatAcc() {
         if(userName === undefined || userName === null){
@@ -57,23 +90,23 @@ function SignUp(){
     return (
         <div id="signUpCentral">
             <div id="form">
-                <h1>Criar conta</h1>
+                <h1>{textsLang.creat[lang]}</h1>
 
                 <div id="infos">
-                    <p>Seu nome:</p>
+                    <p>{textsLang.name[lang]}</p>
                     <input type='text' maxLength='25' onChange={(e)=>{
                         setUserName(e.target.value)
                     }}/>
-                    <p>Sua senha:</p>
+                    <p>{textsLang.password[lang]}</p>
                     <input type='password' onChange={(e)=>{
                         setUserPassword(e.target.value)
                     }}/>
                 </div>
                 
-                <button onClick={creatAcc}>Enviar</button>
-                <p>Já possui uma conta? <Link to="/">Logue usando-a</Link></p>
+                <button onClick={creatAcc}>{textsLang.btn[lang]}</button>
+                <p>{textsLang.redirect[lang]} <Link to="/">{textsLang.redirectLink[lang]}</Link></p>
             </div>
-            <LanguageOptions/>
+            <LanguageOptions getLang={getLang}/>
         </div>
     )
 }

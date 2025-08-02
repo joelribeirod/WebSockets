@@ -3,7 +3,7 @@ import br from '../imgs/br.svg'
 import us from '../imgs/us.svg'
 import './LanguageOptions.css'
 
-function LanguageOptions(){
+function LanguageOptions({getLang}){
     const divRef = useRef(null)
     const [isSelected, setIsSelected] = useState(false)
     const [countrySelected, setCountrySelected] = useState(null)
@@ -18,6 +18,7 @@ function LanguageOptions(){
 
         localStorage.setItem('language', JSON.stringify({language: countrySelected}))
         setWhatLanguage(countrySelected)
+        getLang(countrySelected)
     },[countrySelected])
 
     useEffect(()=>{
@@ -66,11 +67,7 @@ function LanguageOptions(){
         }else{
             divRef.current.className = 'selectionOff'
             setIsSelected(false)
-
-            console.log(e.target)
         }
-        
-        console.log(divRef.current)
     }
 
     return (

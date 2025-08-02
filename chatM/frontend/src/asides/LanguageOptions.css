@@ -5,6 +5,8 @@
     background-color: white;
     overflow: hidden;
     border: 1px solid purple;
+    margin: 6px;
+    user-select: none;
 }
 
 #selectLanguage span{

@@ -1,15 +1,49 @@
 import { useState } from 'react'
-import { useNavigate, Link } from "react-router-dom"
+import { useNavigate, Link, redirect } from "react-router-dom"
 
 import './SignIn.css'
 import LanguageOptions from '../asides/LanguageOptions'
 
 function SignIn(){
+    const language = JSON.parse(localStorage.getItem('language')).language
     const navigate = useNavigate()
     const urlHTTP = process.env.REACT_APP_URLCONNECTIONHTTP || 'http://localhost:8081'
 
     const [userName, setUserName] = useState()
     const [userPassword, setUserPassword] = useState()
+    const [lang, setLang] = useState(language)
+
+    const textsLang = {
+        log:{
+            br: 'Logar conta',
+            us: 'Log account'
+        },
+        name:{
+            br: 'Seu nome',
+            us: 'Your name'
+        },
+        password:{
+            br: 'Sua senha',
+            us: 'Your password'
+        },
+        btn:{
+            br: 'Enviar',
+            us: 'Send'
+        },
+        redirect:{
+            br: 'Não possui uma conta?',
+            us: 'Dont have an account?'
+        },
+        redirectLink:{
+            br: 'Crie uma aqui',
+            us: 'Create one here'
+        }
+
+    }
+    
+    function getLang(e){
+        setLang(e)
+    }
 
     function logIn(){
         if(userName === undefined || userName === null){
@@ -57,23 +91,23 @@ function SignIn(){
     return (
         <div id="signInCentral">
             <div id="form">
-                <h1>Logar conta</h1>
+                <h1>{textsLang.log[lang]}</h1>
 
                 <div id="infos">
-                    <p>Seu nome:</p>
+                    <p>{textsLang.name[lang]}</p>
                     <input type='text' maxLength='25' onChange={(e)=>{
                         setUserName(e.target.value)
                     }}/>
-                    <p>Sua senha:</p>
+                    <p>{textsLang.password[lang]}</p>
                     <input type='password' onChange={(e)=>{
                         setUserPassword(e.target.value)
                     }}/>
                 </div>
 
-                <button onClick={logIn}>Enviar</button>
-                <p>Não possui uma conta? <Link to="/signup">Crie uma aqui</Link></p>
+                <button onClick={logIn}>{textsLang.btn[lang]}</button>
+                <p>{textsLang.redirect[lang]} <Link to="/signup">{textsLang.redirectLink[lang]}</Link></p>
             </div>
-            <LanguageOptions />
+            <LanguageOptions getLang={getLang}/>
         </div>
     )
 }

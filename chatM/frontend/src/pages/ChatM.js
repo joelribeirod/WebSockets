@@ -8,7 +8,7 @@ import LanguageOptions from '../asides/LanguageOptions'
 function ChatM(){
     const ws = useRef(null)
     const wsConnection = process.env.REACT_APP_URLCONNECTIONWS || 'ws://localhost:8081'
-
+    const language = JSON.parse(localStorage.getItem('language')).language
 
     const dataForTheSpansRef = useRef(null)
     const dataForTheDivsRef = useRef(null)
@@ -16,6 +16,7 @@ function ChatM(){
     const refForActivatedDiv = useRef(null)
     const refForInputThatSendMessage = useRef(null)
     
+    const [lang, setLang] = useState(language)
     const [activatedDiv, setActivatedDiv] = useState([])
     const [userCounteur, setUserCounteur] = useState(0)
     const [charactersCounter, setCharactersCounter] = useState(0)
@@ -326,6 +327,33 @@ function ChatM(){
         
     },[sendMessage])
 
+    const textsLang = {
+        user:{
+            br: 'Usuário',
+            us: 'User'
+        },
+        ruleAndInfo1:{
+            br: 'Use /nomeDeUsuário para iniciar uma conversa privada.',
+            us: 'Use /userName to iniciate a private conversation.'
+        },
+        ruleAndInfo2:{
+            br: 'Seja educado com os outros, e se divirta.',
+            us: 'Be polite with others, and hf.'
+        },
+        userCount:{
+            br: 'Usuários online:',
+            us: 'Online Users:'
+        },
+        inputPlaceHolder:{
+            br: 'Enviar sua mensagem',
+            us: 'Send your message'
+        }
+    }
+
+    function getLang(e){
+        setLang(e)
+    }
+
     return (
         <div id="chatPage">
             <h1>Chat M</h1>
@@ -334,7 +362,7 @@ function ChatM(){
                 <button id="logOut" onClick={()=>(closeWS())}>
                     <span className="material-symbols-outlined">logout</span>
                 </button>
-                <h1>User: {getUserName()}</h1>
+                <h1>{textsLang.user[lang]} {getUserName()}</h1>
             </div>
 
             <div id="chat">
@@ -369,8 +397,8 @@ function ChatM(){
                 {/* Where the div for each conversation stay */}
                 <div id="conversations">
                     <div id='globalChat' className='conversation on'>
-                        <p className='rulesAndInfos'>Use /user to iniciate a private conversation</p>
-                        <p className='rulesAndInfos'>Be polite with others, and hf</p>
+                        <p className='rulesAndInfos'>{textsLang.ruleAndInfo1[lang]}</p>
+                        <p className='rulesAndInfos'>{textsLang.ruleAndInfo2[lang]}</p>
                         <hr/>
                         {dataForGlobalMessages && dataForGlobalMessages.map((message, index)=>(
                             <p key={index} className={message.whoSent}>{message.from}: {message.message}</p>
@@ -395,7 +423,7 @@ function ChatM(){
                     <input 
                     type='text' 
                     ref={refForInputThatSendMessage}
-                    placeholder='Send your message' 
+                    placeholder={textsLang.inputPlaceHolder[lang]}
                     value={message}
                     onChange={(e)=>{
                         setMessage(e.target.value)
@@ -409,8 +437,8 @@ function ChatM(){
                 <span id='charactersCounter' className='lessThan'>{charactersCounter}/1024</span>}
             </div>
 
-            <p id='UserCounteur'>Online Users: {userCounteur}</p>
-            <LanguageOptions/>
+            <p id='UserCounteur'>{textsLang.userCount[lang]} {userCounteur}</p>
+            <LanguageOptions getLang={getLang}/>
         </div>
     )
 }
