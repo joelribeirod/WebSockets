@@ -50,7 +50,7 @@
                     res.status(200).send({
                         success: "User found",
                         token: token, 
-                        tokenDuration: process.env.tokenDuration
+                        tokenDuration: Date.now() + process.env.tokenDuration * 1000
                     })
                 }else{
                     res.status(400).send({err: 'Incorrect user informations'})
