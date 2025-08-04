@@ -146,6 +146,7 @@ function ChatM(){
             // analyzes if the message was sent with success
             if(data.success){
                 const userHost = data.connectedTo
+                console.log(refForMessages.current)
 
                 // search for the user
                 let findUser = dataForTheSpansRef.current.find(user => user.userName === userHost)
@@ -213,6 +214,8 @@ function ChatM(){
                 
                 // Update the data and clear the input message
                 setDataForGlobalMessages(prev => [...prev, newMessage])
+                //Clear the input after sending a message
+                setMessage('')
             }
 
             // If the server message is a counter, it update the userCounter with the recent number
@@ -314,8 +317,6 @@ function ChatM(){
         }
         //Clear the Character Counter after sending a message
         setCharactersCounter(0)
-        //Clear the input after sending a message
-        setMessage('')
     },[message])
 
     useEffect(()=>{
@@ -339,12 +340,12 @@ function ChatM(){
 
     const textsLang = {
         user:{
-            br: 'Usuário',
-            us: 'User'
+            br: 'Usuário:',
+            us: 'User:'
         },
         ruleAndInfo1:{
-            br: 'Use /nomeDeUsuário para iniciar uma conversa privada.',
-            us: 'Use /userName to iniciate a private conversation.'
+            br: 'Use /nomeDeUsuário para iniciar uma conversa privada. Exemplo: "/Fulano eae cara"',
+            us: 'Use /userName to iniciate a private conversation. Example: "/bob yo bro, sup?"'
         },
         ruleAndInfo2:{
             br: 'Seja educado com os outros, e se divirta.',

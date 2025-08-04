@@ -196,3 +196,19 @@ span{
 .lessThan{
     color: blue;
 }
+
+@media screen and (max-width: 768px) {
+    #chat{
+        width: 80%;
+        height: 500px;
+        margin-left: 20px;
+    }
+
+    #chatPage > h1{
+        margin-top: 36px;
+    }
+
+    .conversation{
+        padding: 8px 0px;
+    }
+}
